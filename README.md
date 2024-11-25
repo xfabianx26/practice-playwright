@@ -8,7 +8,8 @@ En esta versión de Playwright, el modo **headless** no funciona correctamente. 
    ```bash
    npm outdated
 **Si necesitas actualizar los navegadores que utiliza Playwright, ejecuta:**
-npx playwright install
+
+> npx playwright install
 
 Inicializar un Proyecto Playwright
 Para configurar un nuevo proyecto Playwright, utiliza el siguiente comando:
