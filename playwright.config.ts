@@ -4,14 +4,25 @@ import { defineConfig, devices } from '@playwright/test';
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+/* 
 
+// Carga las variables de entorno desde el archivo .env
+
+ */
+import dotenv from 'dotenv';
+import path from 'path';
+dotenv.config({ path: path.resolve(__dirname, `.env.${process.env.NODE_ENV ? process.env.NODE_ENV : 'dev'}`) });
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+
+/* require('dotenv').config({
+  path: '.env.dev', // Ruta al archivo de variables de entorno
+}); */
+
 export default defineConfig({
+
+  timeout: 60_000,
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -25,11 +36,9 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',
-
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    headless: false, // Configuración para abrir el navegador con interfaz gráfica
+    trace: 'on-first-retry', // Activa el registro de trazas para fallos en el primer intento
+   // screenshot: 'only-on-failure', // Toma capturas de pantalla en cada prueba
   },
 
   /* Configure projects for major browsers */

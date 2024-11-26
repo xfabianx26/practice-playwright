@@ -69,12 +69,21 @@ test('swag lab', async ({ page }) => {
   });
   
 
-  test('prueba de login', async ({ page }) => {
-    await page.goto('https://www.saucedemo.com');
+  test('prueba de login', async ({ page }, testInfo) => {
+    // set NODE_ENV=qa
+  await page.goto('https://www.saucedemo.com');
+   // await page.goto(process.env.URL);
    /* llamar a loginpage */
    const login = new LoginPage(page)
    await login.loginWithCredentials("standard_user", "secret_sauce")
-   await login.checkSuccessfulLogin();
+   await login.checkSuccessfulLogin(); 
+
+   await testInfo.attach('login', {
+    body: await page.screenshot(),
+    contentType: 'image/png',
+  });
+  
+  // await page.screenshot({ path: 'screenshots/login.png', fullPage: true });
 
 
   });
